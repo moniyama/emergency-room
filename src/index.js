@@ -1,4 +1,5 @@
 import login from "./pages/login.js"
+import signup from "./pages/signup.js"
 
 function routes() {
   const root = document.querySelector("#root")
@@ -7,6 +8,9 @@ function routes() {
   switch (window.location.hash) {
     case "#login":
       root.appendChild(login())
+      break
+    case "#signup":
+      root.appendChild(signup())
       break
     default:
       root.appendChild(login())

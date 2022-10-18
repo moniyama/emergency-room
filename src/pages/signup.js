@@ -1,4 +1,4 @@
-import { loginWithFirebase } from "../services/firebase.js"
+import { createAccountWithFirebase } from "../services/firebase.js"
 import { redirect } from "../utils.js"
 
 export default function () {
@@ -6,19 +6,19 @@ export default function () {
   container.innerHTML = `
     <input id="email" type="email" placeholder="email">
     <input id="password" type="password" placeholder="password">
-    <button id="btn-login">LOGIN</button>
+    <button id="btn-back">VOLTAR</button>
     <button id="btn-sign-up">Cadastrar</button>
   `
 
-  container.querySelector("#btn-login").addEventListener("click", () => {
+  container.querySelector("#btn-sign-up").addEventListener("click", () => {
     const email = container.querySelector("#email").value
     const password = container.querySelector("#password").value
-    loginWithFirebase(email, password)
+    createAccountWithFirebase(email, password)
       .then(() => redirect("#tele"))
   })
 
-  container.querySelector("#btn-sign-up").addEventListener("click", () => {
-    redirect("#signup")
+  container.querySelector("#btn-back").addEventListener("click", () => {
+    redirect("#login")
   })
 
   return container
