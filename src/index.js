@@ -13,8 +13,8 @@ function routes() {
   }
 }
 
-document.addEventListener("load", () => {
+window.addEventListener("load", () => {
   window.location.hash = "#login"
   routes()
 })
-document.addEventListener("hashchange", routes)
+window.addEventListener("hashchange", routes)
