@@ -2,6 +2,8 @@ import login from "./pages/login.js"
 
 function routes() {
   const root = document.querySelector("#root")
+  root.innerHTML = ""
+
   switch (window.location.hash) {
     case "#login":
       root.appendChild(login())
@@ -11,5 +13,8 @@ function routes() {
   }
 }
 
-window.addEventListener("load", routes)
-window.addEventListener("hashchange", routes)
+document.addEventListener("load", () => {
+  window.location.hash = "#login"
+  routes()
+})
+document.addEventListener("hashchange", routes)
