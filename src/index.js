@@ -1,6 +1,7 @@
 import login from "./pages/login.js"
 import signup from "./pages/signup.js"
-
+import rooms from "./pages/rooms.js"
+import { isLoggedUser } from "./services/firebase.js"
 function routes() {
   const root = document.querySelector("#root")
   root.innerHTML = ""
@@ -12,13 +13,21 @@ function routes() {
     case "#signup":
       root.appendChild(signup())
       break
+    case "#tele":
+      root.appendChild(rooms())
+      break
     default:
       root.appendChild(login())
   }
 }
 
 window.addEventListener("load", () => {
-  window.location.hash = "#login"
+  const userLogged = isLoggedUser()
+  if (userLogged) {
+    window.location.hash = "#tele"
+  } else {
+    window.location.hash = "#login"
+  }
   routes()
 })
 window.addEventListener("hashchange", routes)

@@ -8,3 +8,5 @@ export function loginWithFirebase(email, password) {
 export function createAccountWithFirebase(email, password) {
   return createUserWithEmailAndPassword(auth, email, password)
 }
+
+export const isLoggedUser = async () => await auth.currentUser
