@@ -26,17 +26,23 @@ export default function () {
       </ul>
     </section>
     <button id="patients-form">Cadastro de paciente</button>
+    <button id="update-patient-list">Atualizar lista</button>
     `
   const patients = []
   const rooms = [] // [{ number: 1, user: {} }, { number: 2, user: {} }]
 
-  getPatients()
-    .then(querySnapshot => {
-      querySnapshot.forEach((doc) => {
-        patients.push({ ...doc.data(), id: doc.id });
-      });
-      printPatients(patients)
-    })
+  showPatientsList()
+
+  function showPatientsList() {
+    patients.length = 0
+    getPatients()
+      .then(querySnapshot => {
+        querySnapshot.forEach((doc) => {
+          patients.push({ ...doc.data(), id: doc.id });
+        });
+        printPatients(patients)
+      })
+  }
 
   function printPatients(list) {
     container.querySelector("#all-patients").innerHTML = list.map(patient => {
@@ -75,5 +81,7 @@ export default function () {
   container.querySelector("#patients-form").addEventListener("click", () => {
     redirect("#patient-form")
   })
+
+  container.querySelector("#update-patient-list").addEventListener("click", showPatientsList)
   return container
 }
