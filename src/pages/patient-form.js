@@ -39,6 +39,7 @@ export default function () {
       gender: container.querySelector("#gender").value,
       description: container.querySelector("#description").value,
       severity: container.querySelector("#severity").value,
+      attended: false
     }
     addPatient(patient)
       .then(() => {

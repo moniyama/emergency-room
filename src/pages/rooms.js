@@ -18,11 +18,10 @@ export default function () {
     .then(querySnapshot => {
       querySnapshot.forEach((doc) => {
         patients.push({ ...doc.data(), id: doc.id });
-      })
-    })
-    .then(() => {
+      });
       printPatients(patients)
     })
+
   function printPatients(list) {
     container.querySelector("#all-patients").innerHTML = list.map(patient => {
       return `

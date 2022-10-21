@@ -1,6 +1,6 @@
 import { auth, db } from "./firebase-config.js"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-import { addDoc, collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { addDoc, collection, query, orderBy, getDocs, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 export function loginWithFirebase(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
@@ -17,6 +17,6 @@ export function addPatient(patient) {
 }
 
 export function getPatients() {
-  const q = query(collection(db, "patients"), orderBy("severity", "asc"));
+  const q = query(collection(db, "patients"), where("attended", "==", false), orderBy("severity", "asc"));
   return getDocs(q);
 }
