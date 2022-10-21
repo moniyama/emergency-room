@@ -1,4 +1,5 @@
 import { addPatient } from "../services/firebase.js"
+import { redirect } from "../utils.js"
 
 export default function () {
   const container = document.createElement("div")
@@ -26,6 +27,7 @@ export default function () {
         <option value="esi5">ESI 5 Atenção geral</option>
       </select>
       <button id="add-patient">Adicionar</button>
+      <button id="tele">Voltar</button>
     </form>
   `
 
@@ -43,5 +45,11 @@ export default function () {
         container.querySelector("#form").reset()
       })
   })
+
+  container.querySelector("#tele").addEventListener("click", (e) => {
+    e.preventDefault()
+    redirect("#tele")
+  })
+
   return container
 }
