@@ -1,13 +1,13 @@
 import { redirect } from "../utils.js"
-import { getPatients } from "../services/firebase.js"
+import { getPatients, updatePatientAttending } from "../services/firebase.js";
 
 export default function () {
   const container = document.createElement("section")
 
   container.innerHTML = `
-    <div class="flex space-between main margin-top">
+    <div class="flex space-evenly main margin-top">
       <section class="rooms">
-        <ul id="all-rooms" class="flex margin-side space-between">
+        <ul id="all-rooms" class="flex space-evenly">
           <li class="room">
             <h2>Room 1</h2>
             <div></div>
@@ -73,8 +73,12 @@ export default function () {
 
     if (nextPatientBtn) {
       const nextPatient = container.querySelector("#all-patients").firstElementChild
+      const actualPatient = e.target.previousElementSibling
       if (nextPatient) {
-        e.target.previousElementSibling.replaceWith(nextPatient)
+        if (actualPatient.id) {
+          updatePatientAttending(actualPatient.id)
+        }
+        actualPatient.replaceWith(nextPatient)
       }
     }
     if (newPatientBtn) {
