@@ -5,26 +5,26 @@ export default function () {
   const container = document.createElement("section")
 
   container.innerHTML = `
-    <h1>rooms</h1>
-    <aside> 
-      <h1>Lista de espera</h1>
-      <ul id="all-patients"></ul>
-    </aside>
-    <section>
-      <h1>rooms</h1>
-      <ul id="all-rooms">
-        <li class="room">
-          <h2>Room 1</h2>
-          <div></div>
-          <button class="next-patient">proximo</button>
-        </li>
-        <li class="room">
-          <h2>Room 2</h2>
-          <div></div>
-          <button class="next-patient">proximo</button>
-        </li>
-      </ul>
-    </section>
+    <div class="flex space-between main margin-top">
+      <section class="rooms">
+        <ul id="all-rooms" class="flex margin-side space-between">
+          <li class="room">
+            <h2>Room 1</h2>
+            <div></div>
+            <button class="next-patient">proximo</button>
+          </li>
+          <li class="room">
+            <h2>Room 2</h2>
+            <div></div>
+            <button class="next-patient">proximo</button>
+          </li>
+        </ul>
+      </section>
+      <aside class="aside"> 
+        <h1>Lista de espera</h1>
+        <ul id="all-patients"></ul>
+      </aside>
+    </div>
     <button id="patients-form">Cadastro de paciente</button>
     <button id="update-patient-list">Atualizar lista</button>
     `
@@ -66,22 +66,24 @@ export default function () {
     }).join("")
   }
 
-  container.querySelectorAll(".next-patient").forEach(el => el.addEventListener("click", (e) => {
-    const nextPatient = container.querySelector(".patient")
-    if (nextPatient) {
-      e.currentTarget.previousElementSibling.prepend(nextPatient)
-    }
-    const thisRoomPatient = e.currentTarget.previousElementSibling.children
-    const clickedRoomHasAlreadyOnePatient = thisRoomPatient.length > 1
-    if (clickedRoomHasAlreadyOnePatient) {
-      thisRoomPatient[1].remove()
-    }
-  }))
+  container.addEventListener("click", (e) => {
+    const nextPatientBtn = e.target.classList.contains("next-patient")
+    const newPatientBtn = e.target.id === "patients-form"
+    const updatePatientsListBtn = e.target.id === "update-patient-list"
 
-  container.querySelector("#patients-form").addEventListener("click", () => {
-    redirect("#patient-form")
+    if (nextPatientBtn) {
+      const nextPatient = container.querySelector("#all-patients").firstElementChild
+      if (nextPatient) {
+        e.target.previousElementSibling.replaceWith(nextPatient)
+      }
+    }
+    if (newPatientBtn) {
+      redirect("#patient-form")
+    }
+    if (updatePatientsListBtn) {
+      showPatientsList()
+    }
   })
 
-  container.querySelector("#update-patient-list").addEventListener("click", showPatientsList)
   return container
 }

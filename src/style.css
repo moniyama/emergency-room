@@ -16,3 +16,39 @@ body {
   line-height: 10vh;
   text-align: center;
 }
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.main {
+  height: 70vh;
+}
+
+.margin-side {
+  margin: 0 15%;
+}
+
+.margin-top {
+  margin-top: 4%;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.rooms {
+  width: 70%;
+}
+
+.aside {
+  width: 20%;
+}
+
+li {
+  list-style: none;
+}
