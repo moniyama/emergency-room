@@ -19,6 +19,7 @@ body {
 
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .column {
@@ -37,8 +38,8 @@ body {
   margin-top: 4%;
 }
 
-.space-between {
-  justify-content: space-between;
+.space-evenly {
+  justify-content: space-evenly;
 }
 
 .rooms {
@@ -47,6 +48,11 @@ body {
 
 .aside {
   width: 20%;
+}
+
+.room {
+  min-width: 30%;
+  min-height: 125px;
 }
 
 li {

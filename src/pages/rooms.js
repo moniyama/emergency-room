@@ -7,18 +7,7 @@ export default function () {
   container.innerHTML = `
     <div class="flex space-evenly main margin-top">
       <section class="rooms">
-        <ul id="all-rooms" class="flex space-evenly">
-          <li class="room">
-            <h2>Room 1</h2>
-            <div></div>
-            <button class="next-patient">proximo</button>
-          </li>
-          <li class="room">
-            <h2>Room 2</h2>
-            <div></div>
-            <button class="next-patient">proximo</button>
-          </li>
-        </ul>
+        <ul id="all-rooms" class="flex space-evenly"></ul>
       </section>
       <aside class="aside"> 
         <h1>Lista de espera</h1>
@@ -30,8 +19,10 @@ export default function () {
     `
   const patients = []
   const rooms = [] // [{ number: 1, user: {} }, { number: 2, user: {} }]
+  const NUMBERSOFROOMS = 9
 
   showPatientsList()
+  printRooms(NUMBERSOFROOMS)
 
   function showPatientsList() {
     patients.length = 0
@@ -55,15 +46,19 @@ export default function () {
     }).join("")
   }
 
-  function printRooms(list) {
-    container.querySelector("#all-rooms").innerHTML = list.map(room => {
-      return `
+  function printRooms(quantity) {
+    const roomTemplate = (number) => `
         <li class="room">
-          <h2>Room ${room.number}</h2>
-          <div>${room.user.name}</div>
+          <h2>Room ${number}</h2>
+          <div></div>
+          <button class="next-patient">proximo</button>
         </li>    
       `
-    }).join("")
+    let result = ""
+    for (let i = 1; i <= quantity; i++) {
+      result += roomTemplate(i)
+    }
+    container.querySelector("#all-rooms").innerHTML = result
   }
 
   container.addEventListener("click", (e) => {
