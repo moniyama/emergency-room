@@ -3,13 +3,14 @@ import { getPatients, updatePatientAttending } from "../services/firebase.js";
 
 export default function () {
   const container = document.createElement("section")
+  container.classList.add("main")
 
   container.innerHTML = `
-    <div class="flex space-evenly main margin-top">
+    <div class="flex space-between margin-top">
       <section class="rooms">
-        <ul id="all-rooms" class="flex space-evenly"></ul>
+        <ul id="all-rooms" class="flex space-between all-rooms"></ul>
       </section>
-      <aside class="aside"> 
+      <aside class="aside center"> 
         <h1>Lista de espera</h1>
         <ul id="all-patients"></ul>
       </aside>
@@ -38,7 +39,7 @@ export default function () {
   function printPatients(list) {
     container.querySelector("#all-patients").innerHTML = list.map(patient => {
       return `
-        <li class="patient" id=${patient.id}>
+        <li class="patient center ${patient.severity}" id=${patient.id}>
           <div>${patient.name}</div>
           <div>${patient.severity}</div>
         </li>
@@ -48,8 +49,8 @@ export default function () {
 
   function printRooms(quantity) {
     const roomTemplate = (number) => `
-        <li class="room">
-          <h2>Room ${number}</h2>
+        <li class="room flex column space-between center">
+          <h2>Sala ${number}</h2>
           <div></div>
           <button class="next-patient">proximo</button>
         </li>    

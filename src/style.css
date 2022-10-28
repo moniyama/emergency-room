@@ -35,26 +35,68 @@ body {
 }
 
 .margin-top {
-  margin-top: 4%;
+  margin-top: 10px;
 }
 
-.space-evenly {
-  justify-content: space-evenly;
+.space-between {
+  justify-content: space-between;
 }
 
 .rooms {
   width: 70%;
+  margin: 0 2%
 }
 
 .aside {
   width: 20%;
+  margin: 0 2% 0 0;
 }
 
 .room {
   min-width: 30%;
   min-height: 125px;
+  margin-bottom: 1%;
+  padding: 1%;
+  box-shadow: -0.5px -0.5px 28px -2.5px #dddddd
+}
+
+.all-rooms {
+  gap: 10px;
 }
 
 li {
   list-style: none;
+}
+
+button {
+  height: 5vh;
+  cursor: pointer;
+}
+
+.patient {
+  padding: 1%;
+}
+
+.center {
+  text-align: center;
+}
+
+.esi1 {
+  background: rgb(221, 21, 33, 0.5);
+}
+
+.esi2 {
+  background: rgb(230, 95, 18, 0.5);
+}
+
+.esi3 {
+  background: rgb(243, 166, 29, 0.5);
+}
+
+.esi4 {
+  background: rgb(130, 184, 29, 0.5);
+}
+
+.esi5 {
+  background: rgb(25, 143, 47, 0.5);
 }
