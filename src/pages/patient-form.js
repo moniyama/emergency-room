@@ -42,8 +42,9 @@ export default function () {
       appointment: {
         attended: false,
         room: null,
-        startDate: new Date(Date.now()),
-        endDate: null
+        createdDate: new Date(Date.now()),
+        startDate: null,
+        endDate: null,
       }
     }
 
