@@ -39,7 +39,12 @@ export default function () {
       gender: container.querySelector("#gender").value,
       description: container.querySelector("#description").value,
       severity: container.querySelector("#severity").value,
-      attended: false
+      appointment: {
+        attended: false,
+        room: null,
+        startDate: new Date(Date.now()),
+        endDate: null
+      }
     }
 
     addPatient(patient)

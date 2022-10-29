@@ -18,48 +18,71 @@ export default function () {
     <button id="patients-form">Cadastro de paciente</button>
     <button id="update-patient-list">Atualizar lista</button>
     `
-  const patients = []
-  const rooms = [] // [{ number: 1, user: {} }, { number: 2, user: {} }]
+
+  const patientWaitingList = []
+  const patientRoomList = []
   const NUMBERSOFROOMS = 9
 
-  showPatientsList()
-  printRooms(NUMBERSOFROOMS)
+  showPatientWaitingList()
+  showRooms(NUMBERSOFROOMS)
 
-  function showPatientsList() {
-    patients.length = 0
-    getPatients()
+  function showPatientWaitingList() {
+    patientWaitingList.length = 0
+    const waitingListContainer = container.querySelector("#all-patients")
+    getPatients("waiting")
       .then(querySnapshot => {
         querySnapshot.forEach((doc) => {
-          patients.push({ ...doc.data(), id: doc.id });
+          patientWaitingList.push({ ...doc.data(), id: doc.id });
         });
-        printPatients(patients)
+        waitingListContainer.innerHTML = patientWaitingList
+          .map(patient => patientTemplate(patient)).join("")
       })
   }
 
-  function printPatients(list) {
-    container.querySelector("#all-patients").innerHTML = list.map(patient => {
-      return `
-        <li class="patient center ${patient.severity}" id=${patient.id}>
-          <div>${patient.name}</div>
-          <div>${patient.severity}</div>
-        </li>
-      `
-    }).join("")
+  function showRooms(number) {
+    getPatients("progress")
+      .then((querySnapshot) => {
+        querySnapshot.forEach(doc => {
+          patientRoomList.push({ ...doc.data(), id: doc.id });
+        })
+        printRooms(number, patientRoomList)
+      })
+
+    function printRooms(quantity, patientsList) {
+      let result = ""
+      let count = 0
+      while (count < quantity) {
+        count++
+        const hasPatientInRoom = patientsList.filter(patient => patient.appointment.room === count)
+        if (hasPatientInRoom) {
+          result += roomTemplate(count, hasPatientInRoom[0])
+        } else {
+          result += roomTemplate(count)
+        }
+      }
+      container.querySelector("#all-rooms").innerHTML = result
+    }
   }
 
-  function printRooms(quantity) {
-    const roomTemplate = (number) => `
-        <li class="room flex column space-between center">
-          <h2>Sala ${number}</h2>
-          <div></div>
-          <button class="next-patient">proximo</button>
-        </li>    
-      `
-    let result = ""
-    for (let i = 1; i <= quantity; i++) {
-      result += roomTemplate(i)
-    }
-    container.querySelector("#all-rooms").innerHTML = result
+  function patientTemplate(patient) {
+    return `
+      <li class="patient center ${patient.severity}" id=${patient.id}>
+        <div > ${patient.name}</div >
+        <div>${patient.severity}</div>
+      </li>
+    `
+  }
+
+  function roomTemplate(number, patient = {}) {
+    return `
+      <li class= "room flex column space-between center">
+        <h2>Sala ${number}</h2>
+        ${patient.name
+        ? `<ul>${patientTemplate(patient)}</ul>`
+        : "<div></div>"}
+        <button class= "next-patient"> proximo</button>
+      </li >
+    `
   }
 
   container.addEventListener("click", (e) => {
@@ -81,7 +104,7 @@ export default function () {
       redirect("#patient-form")
     }
     if (updatePatientsListBtn) {
-      showPatientsList()
+      showPatientWaitingList()
     }
   })
 

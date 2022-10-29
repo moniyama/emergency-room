@@ -16,13 +16,19 @@ export function addPatient(patient) {
   return addDoc(collection(db, "patients"), patient);
 }
 
-export function getPatients() {
-  const q = query(collection(db, "patients"), where("attended", "==", false), orderBy("severity", "asc"));
+export function getPatients(status) {
+  let q;
+  if (status === "waiting") {
+    q = query(collection(db, "patients"), where("appointment.attended", "==", false), orderBy("severity", "asc"));
+  }
+  if (status === "progress") {
+    q = query(collection(db, "patients"), where("appointment.attended", "==", false), where("appointment.room", "!=", null));
+  }
   return getDocs(q);
 }
 
 export function updatePatientAttending(patientID) {
-  updateDoc(doc(db, "patients", patientID), {
+  return updateDoc(doc(db, "patients", patientID), {
     attended: true
   });
 }
