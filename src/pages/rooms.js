@@ -1,5 +1,5 @@
 import { redirect } from "../utils.js"
-import { getPatients, updatePatientAttending } from "../services/firebase.js";
+import { getPatients, updatePatient } from "../services/firebase.js";
 
 export default function () {
   const container = document.createElement("section")
@@ -94,10 +94,13 @@ export default function () {
       const nextPatient = container.querySelector("#all-patients").firstElementChild
       const actualPatient = e.target.previousElementSibling
       if (nextPatient) {
-        if (actualPatient.id) {
-          updatePatientAttending(actualPatient.id)
-        }
+        const hasPatient = actualPatient.id
+        const room = Number(e.target.parentElement.firstElementChild.textContent.substring(4))
+        updatePatient({ appointment: "start", room }, nextPatient.id)
         actualPatient.replaceWith(nextPatient)
+        if (hasPatient) {
+          updatePatient({ appointment: "end" }, actualPatient.id)
+        }
       }
     }
     if (newPatientBtn) {

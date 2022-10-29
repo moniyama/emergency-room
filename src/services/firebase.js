@@ -27,8 +27,23 @@ export function getPatients(status) {
   return getDocs(q);
 }
 
-export function updatePatientAttending(patientID) {
-  return updateDoc(doc(db, "patients", patientID), {
-    attended: true
-  });
+export function updatePatient(status, patientID) {
+  const { appointment, room } = status;
+  let update;
+  if (appointment === "start") {
+    console.log("start");
+    update = {
+      "appointment.room": room,
+      "appointment.startDate": new Date(Date.now())
+    }
+  }
+  if (appointment === "end") {
+    console.log("end");
+
+    update = {
+      "appointment.attended": true,
+      "appointment.endDate": new Date(Date.now())
+    }
+  }
+  return updateDoc(doc(db, "patients", patientID), update);
 }
