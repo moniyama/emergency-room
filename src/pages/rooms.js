@@ -15,8 +15,10 @@ export default function () {
         <ul id="all-patients"></ul>
       </aside>
     </div>
-    <button id="patients-form">Cadastro de paciente</button>
-    <button id="update-patient-list">Atualizar lista</button>
+    <section class="margin-side btn-section flex space-between">
+      <button id="patients-form">Cadastro de paciente</button>
+      <button id="update-patient-list">Atualizar lista</button>
+    </section>
     `
 
   const patientWaitingList = []

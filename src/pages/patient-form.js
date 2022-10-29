@@ -3,9 +3,13 @@ import { redirect } from "../utils.js"
 
 export default function () {
   const container = document.createElement("div")
+  container.classList.add("main")
+  container.classList.add("flex")
+  container.classList.add("column")
+  container.classList.add("space-between")
 
   container.innerHTML = `
-    <form id="form" class="flex column main margin-side">
+    <form id="form" class="flex column margin-top margin-side">
       <label class="margin-top" for="name">Nome completo</label>
       <input id="name" type="text">
       <label class="margin-top" for="age">Idade</label>
@@ -28,7 +32,9 @@ export default function () {
       </select>
         <button id="add-patient" class="margin-top">Adicionar</button>
       </form>
-      <button id="tele">Voltar</button>
+      <section class="btn-section">
+        <button id="tele">Voltar</button>
+      </section>
   `
 
   container.querySelector("#add-patient").addEventListener("click", (e) => {

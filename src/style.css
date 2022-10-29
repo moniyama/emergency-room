@@ -27,7 +27,7 @@ body {
 }
 
 .main {
-  height: 70vh;
+  min-height: 70vh;
 }
 
 .margin-side {
@@ -71,6 +71,11 @@ li {
 button {
   height: 5vh;
   cursor: pointer;
+  min-width: 100px;
+}
+
+.btn-section {
+  padding: 1%;
 }
 
 .patient {
