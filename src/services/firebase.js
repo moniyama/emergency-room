@@ -19,7 +19,7 @@ export function addPatient(patient) {
 export function getPatients(status) {
   let q;
   if (status === "waiting") {
-    q = query(collection(db, "patients"), where("appointment.attended", "==", false), orderBy("severity", "asc"));
+    q = query(collection(db, "patients"), where("appointment.attended", "==", false), where("appointment.room", "==", null), orderBy("severity", "asc"));
   }
   if (status === "progress") {
     q = query(collection(db, "patients"), where("appointment.attended", "==", false), where("appointment.room", "!=", null));
