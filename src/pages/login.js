@@ -3,11 +3,16 @@ import { redirect } from "../utils.js"
 
 export default function () {
   const container = document.createElement("section")
+  container.classList.add("main")
+  container.classList.add("flex")
+
   container.innerHTML = `
-    <input id="email" type="email" placeholder="email">
-    <input id="password" type="password" placeholder="password">
-    <button id="btn-login">LOGIN</button>
-    <button id="btn-sign-up">Cadastrar</button>
+    <div class="column flex margin-top">
+      <input id="email" type="email" placeholder="email">
+      <input id="password" type="password" placeholder="password">
+      <button id="btn-login">LOGIN</button>
+      <button id="btn-sign-up">Cadastre-se AQUI</button>
+    </div>
   `
 
   container.querySelector("#btn-login").addEventListener("click", () => {

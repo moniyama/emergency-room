@@ -10,9 +10,11 @@ function routes() {
 
   switch (window.location.hash) {
     case "#login":
+      root.appendChild(header())
       root.appendChild(login())
       break
     case "#signup":
+      root.appendChild(header())
       root.appendChild(signup())
       break
     case "#tele":
@@ -28,8 +30,8 @@ function routes() {
   }
 }
 
-window.addEventListener("load", () => {
-  const userLogged = isLoggedUser()
+window.addEventListener("load", async() => {
+  const userLogged = await isLoggedUser()
   if (userLogged) {
     window.location.hash = "#tele"
   } else {
