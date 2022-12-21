@@ -4,25 +4,24 @@ import rooms from "./pages/rooms.js"
 import patientForm from "./pages/patient-form.js"
 import { isLoggedUser } from "./services/firebase.js"
 import header from "./components/header.js"
+import { redirect } from "./utils.js"
+
 function routes() {
   const root = document.querySelector("#root")
   root.innerHTML = ""
 
+  root.appendChild(header())
   switch (window.location.hash) {
     case "#login":
-      root.appendChild(header())
       root.appendChild(login())
       break
     case "#signup":
-      root.appendChild(header())
       root.appendChild(signup())
       break
     case "#tele":
-      root.appendChild(header())
       root.appendChild(rooms())
       break
     case "#patient-form":
-      root.appendChild(header())
       root.appendChild(patientForm())
       break
     default:
@@ -30,12 +29,12 @@ function routes() {
   }
 }
 
-window.addEventListener("load", async() => {
+window.addEventListener("load", async () => {
   const userLogged = await isLoggedUser()
   if (userLogged) {
-    window.location.hash = "#tele"
+    redirect("#tele")
   } else {
-    window.location.hash = "#login"
+    redirect("#login")
   }
   routes()
 })
