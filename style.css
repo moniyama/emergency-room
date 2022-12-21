@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header {
+  background-color: aquamarine;
+  margin: 0;
+  line-height: 10vh;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.main {
+  min-height: 70vh;
+  height: 90vh;
+  justify-content: space-around;
+}
+
+.margin-side {
+  margin: 0 15%;
+}
+
+.margin-top {
+  margin-top: 10px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.rooms {
+  width: 70%;
+  margin: 0 2%
+}
+
+.aside {
+  width: 20%;
+  margin: 0 2% 0 0;
+}
+
+.room {
+  min-width: 30%;
+  min-height: 125px;
+  margin-bottom: 1%;
+  padding: 1%;
+  box-shadow: -0.5px -0.5px 28px -2.5px #dddddd
+}
+
+.all-rooms {
+  gap: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  height: 5vh;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.btn-section {
+  padding: 1%;
+}
+
+.patient {
+  padding: 1%;
+}
+
+.center {
+  text-align: center;
+}
+
+.esi1 {
+  background: rgb(221, 21, 33, 0.5);
+}
+
+.esi2 {
+  background: rgb(230, 95, 18, 0.5);
+}
+
+.esi3 {
+  background: rgb(243, 166, 29, 0.5);
+}
+
+.esi4 {
+  background: rgb(130, 184, 29, 0.5);
+}
+
+.esi5 {
+  background: rgb(25, 143, 47, 0.5);
+}
