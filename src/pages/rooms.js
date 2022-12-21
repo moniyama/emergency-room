@@ -4,6 +4,8 @@ import { getPatients, updatePatient } from "../services/firebase.js";
 export default function () {
   const container = document.createElement("section")
   container.classList.add("main")
+  container.classList.add("column")
+  container.classList.add("flex")
 
   container.innerHTML = `
     <div class="flex space-between margin-top">

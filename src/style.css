@@ -28,6 +28,8 @@ body {
 
 .main {
   min-height: 70vh;
+  height: 90vh;
+  justify-content: space-around;
 }
 
 .margin-side {
