@@ -1,5 +1,5 @@
 import { loginWithFirebase } from "../services/firebase.js"
-import { redirect } from "../utils.js"
+import { redirect, showError } from "../utils.js"
 
 export default function () {
   const container = document.createElement("section")
@@ -15,15 +15,28 @@ export default function () {
     </div>
   `
 
-  container.querySelector("#btn-login").addEventListener("click", () => {
-    const email = container.querySelector("#email").value
-    const password = container.querySelector("#password").value
-    loginWithFirebase(email, password)
-      .then(() => redirect("#tele"))
-  })
+  container.addEventListener("click", (event) => {
+    const { target } = event
+    const isSignInButton = target.id === "btn-login"
+    const isSignUpButton = target.id === "btn-sign-up"
 
-  container.querySelector("#btn-sign-up").addEventListener("click", () => {
-    redirect("#signup")
+    if (isSignInButton) {
+      const email = container.querySelector("#email").value
+      const password = container.querySelector("#password").value
+      loginWithFirebase(email, password)
+        .then(() => redirect("#tele"))
+        .catch(err => {
+          const hasError = container.querySelector(".error")
+          if (!hasError) {
+            container.firstElementChild.appendChild(showError(err.message))
+          } else {
+            hasError.innerHTML = err.message
+          }
+        })
+    }
+    if (isSignUpButton) {
+      redirect("#signup")
+    }
   })
 
   return container
